@@ -1,0 +1,19 @@
+service: create-local-dynamodb-resources
+
+plugins:
+  - serverless-dynamodb-local
+
+provider:
+  name: aws
+  stage: dev
+
+custom:
+  dynamodb:
+    start:
+      host: localhost
+    stages:
+      - local
+
+resources:
+  Resources:
+    dynamodb: ${file(./dynamodb.yml)}
