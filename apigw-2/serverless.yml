@@ -1,0 +1,16 @@
+service: apigw-2
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  httpApi:
+    payload: '2.0'
+
+functions:
+  hello:
+    handler: handler.catchAll
+    events:
+      - httpApi: '*'

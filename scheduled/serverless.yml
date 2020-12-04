@@ -1,0 +1,16 @@
+service: once-a-minute
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+functions:
+  hello:
+    handler: index.timer
+    events:
+      - eventBridge:
+        schedule: rate(1 minute)
+          #'cron(*/1 ? * * *)'

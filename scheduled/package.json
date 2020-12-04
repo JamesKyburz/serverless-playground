@@ -1,0 +1,16 @@
+{
+  "name": "timer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "James Kyburz <james.kyburz@gmail.com>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "serverless": "^2.14.0",
+    "serverless-offline": "^6.8.0"
+  }
+}
