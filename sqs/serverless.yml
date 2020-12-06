@@ -1,0 +1,50 @@
+service: sqs-stack
+
+frameworkVersion: ^2.15
+
+package:
+  individually: true
+
+plugins:
+  - serverless-offline
+  - serverless-offline-sqs
+  - serverless-pseudo-parameters
+  - serverless-iam-roles-per-function
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+custom:
+  serverless-offline-sqs:
+    autoCreate: true
+    apiVersion: '2012-11-05'
+    endpoint: http://0.0.0.0:9324
+    region: us-east-1
+    accessKeyId: x
+    secretAccessKey: x
+    skipCacheInvalidation: false
+
+functions:
+  sqs:
+    handler: index.sqs
+    timeout: 6
+    memorySize: 128
+    events:
+      - sqs:
+           arn:
+             Fn::GetAtt:
+               - Q
+               - Arn
+      ##- sqs:
+      ##    arn: "arn:#{AWS::Partition}:sqs:#{AWS::Region}:#{AWS::AccountId}:q"
+      ##    enabled: true
+      ##    batchSize: 1
+
+resources:
+  Resources:
+    Q:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "q"
+        VisibilityTimeout: 100
