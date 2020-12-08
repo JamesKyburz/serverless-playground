@@ -5,11 +5,12 @@ set -euo pipefail
 docker run \
   --rm \
   -ti \
-  -v "${PWD:?}":/work \
   -e "AWS_ACCESS_KEY_ID" \
   -e "AWS_SECRET_ACCESS_KEY" \
   -e "AWS_SESSION_TOKEN" \
-  --network host \
+  -v "$(pwd)":/work \
+  -v "$(pwd)/.bash_history:/root/.bash_history" \
   -w /work \
+  --network host \
   -v /var/run/docker.sock:/var/run/docker.sock \
   jameskyburz/ops-kitchen bash
