@@ -8,9 +8,15 @@ provider:
   runtime: nodejs12.x
   httpApi:
     payload: '2.0'
+  deploymentBucket:
+    blockPublicAccess: true
+    serverSideEncryption: AES256
+  logRetentionInDays: 5
 
 functions:
   hello:
+    timeout: 6
+    memorySize: 128
     handler: handler.catchAll
     events:
       - httpApi: '*'

@@ -12,6 +12,10 @@ plugins:
 provider:
   name: aws
   runtime: nodejs12.x
+  deploymentBucket:
+    blockPublicAccess: true
+    serverSideEncryption: AES256
+  logRetentionInDays: 5
 
 custom:
   s3:
@@ -19,9 +23,9 @@ custom:
 
 functions:
   document:
-    handler: index.s3
     timeout: 6
     memorySize: 128
+    handler: index.s3
     events:
       - s3:
           bucket: 'document'

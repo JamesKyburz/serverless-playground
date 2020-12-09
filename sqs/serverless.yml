@@ -14,6 +14,10 @@ plugins:
 provider:
   name: aws
   runtime: nodejs12.x
+  deploymentBucket:
+    blockPublicAccess: true
+    serverSideEncryption: AES256
+  logRetentionInDays: 5
 
 custom:
   serverless-offline-sqs:

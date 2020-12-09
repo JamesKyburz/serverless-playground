@@ -11,11 +11,17 @@ provider:
         - "execute-api:ManageConnections"
       Resource:
         - "arn:aws:execute-api:*:*:**/@connections/*"
+  deploymentBucket:
+    blockPublicAccess: true
+    serverSideEncryption: AES256
+  logRetentionInDays: 5
 
   websocketsApiRouteSelectionExpression: $request.body.message
 
 functions:
   handler:
+    timeout: 6
+    memorySize: 128
     handler: src/index.handler
     events:
       - websocket:

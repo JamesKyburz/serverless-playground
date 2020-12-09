@@ -6,9 +6,15 @@ plugins:
 provider:
   name: aws
   runtime: nodejs12.x
+  deploymentBucket:
+    blockPublicAccess: true
+    serverSideEncryption: AES256
+  logRetentionInDays: 5
 
 functions:
   hello:
+    timeout: 6
+    memorySize: 128
     handler: index.timer
     events:
       - eventBridge:
