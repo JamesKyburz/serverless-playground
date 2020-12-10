@@ -35,11 +35,11 @@ functions:
     handler: index.s3
     events:
       - s3:
-          bucket: 'document'
+          bucket: 'd622e0f1ca8b1449bec9e9f27c110a46cd4ee7b1-document'
           event: s3:ObjectCreated:*
           existing: true
       - s3:
-          bucket: 'document'
+          bucket: 'd622e0f1ca8b1449bec9e9f27c110a46cd4ee7b1-document'
           event: s3:ObjectRemoved:*
           existing: true
     iamRoleStatementsName: ${self:service.name}-${self:provider.stage}-document"
@@ -50,4 +50,4 @@ resources:
     Document:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: 'document'
+        BucketName: 'd622e0f1ca8b1449bec9e9f27c110a46cd4ee7b1-document'
