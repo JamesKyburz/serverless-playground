@@ -8,6 +8,8 @@ frameworkVersion: ^2.15.0
 plugins:
   - serverless-iam-roles-per-function
   - serverless-offline
+  - serverless-pseudo-parameters
+
 provider:
   name: aws
   runtime: nodejs12.x
