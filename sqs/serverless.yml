@@ -54,6 +54,14 @@ functions:
       ##    batchSize: 1
     iamRoleStatementsName: ${self:service.name}-${self:provider.stage}-sqs
     iamRoleStatementsInherit: true
+    iamRoleStatements:
+      - Effect: Allow
+    Action:
+      - sqs:ReceiveMessage
+      - sqs:DeleteMessage*
+      - sqs:GetQueue*
+    Resource:
+      - "arn:#{AWS::Partition}:sqs:#{AWS::Region}:#{AWS::AccountId}:q"
 
 resources:
   Resources:
