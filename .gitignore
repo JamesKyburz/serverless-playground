@@ -4,3 +4,4 @@ npm-debug.log
 .nyc_output
 .serverless
 s3/buckets
+.bash_history

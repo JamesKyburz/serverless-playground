@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+touch .bash_history
+
 docker run \
   --rm \
   -ti \
