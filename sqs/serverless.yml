@@ -56,12 +56,12 @@ functions:
     iamRoleStatementsInherit: true
     iamRoleStatements:
       - Effect: Allow
-    Action:
-      - sqs:ReceiveMessage
-      - sqs:DeleteMessage*
-      - sqs:GetQueue*
-    Resource:
-      - "arn:#{AWS::Partition}:sqs:#{AWS::Region}:#{AWS::AccountId}:q"
+        Action:
+          - sqs:ReceiveMessage
+          - sqs:DeleteMessage*
+          - sqs:GetQueue*
+        Resource:
+          - "arn:#{AWS::Partition}:sqs:#{AWS::Region}:#{AWS::AccountId}:q"
 
 resources:
   Resources:
