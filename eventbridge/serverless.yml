@@ -5,9 +5,7 @@ package:
 
 plugins:
   - serverless-offline
-  - serverless-pseudo-parameters
   - serverless-iam-roles-per-function
-
 provider:
   name: aws
   runtime: nodejs12.x

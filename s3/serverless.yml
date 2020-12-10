@@ -3,11 +3,9 @@ service: s3-stack
 frameworkVersion: ^2.15.0
 
 plugins:
-  - serverless-pseudo-parameters
   - serverless-iam-roles-per-function
   - serverless-offline
   - serverless-s3-local
-
 provider:
   name: aws
   runtime: nodejs12.x
