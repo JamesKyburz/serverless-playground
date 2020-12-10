@@ -15,3 +15,7 @@ Properties:
   TimeToLiveSpecification:
     AttributeName: ttl
     Enabled: true
+  StreamSpecification:
+    StreamViewType: NEW_IMAGE
+  SSESpecification:
+    SSEEnabled: true

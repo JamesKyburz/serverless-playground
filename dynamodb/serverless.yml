@@ -1,0 +1,44 @@
+service: dynamodb
+
+frameworkVersion: ^2.15.0
+
+package:
+  individually: true
+
+plugins:
+  - serverless-iam-roles-per-function
+  - serverless-offline
+provider:
+  name: aws
+  runtime: nodejs12.x
+  deploymentBucket:
+    blockPublicAccess: true
+    serverSideEncryption: AES256
+  logRetentionInDays: 5
+  #tracing:
+  #  lambda: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - xray:PutTelemetryRecords
+        - xray:PutTraceSegments
+      Resource: '*'
+  #tags:
+  #  commit: '${env:COMMIT_ID}'
+
+functions:
+  trigger:
+    timeout: 6
+    memorySize: 128
+    handler: index.trigger
+    iamRoleStatementsName: ${self:service.name}-${self:provider.stage}-trigger
+    iamRoleStatementsInherit: true
+    events:
+      - stream:
+          type: dynamodb
+          arn:
+            Fn::GetAtt: [dynamodb, StreamArn]
+
+resources:
+  Resources:
+    dynamodb: ${file(./dynamodb.yml)}
