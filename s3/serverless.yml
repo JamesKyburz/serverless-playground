@@ -1,11 +1,10 @@
 service: s3-stack
 
-frameworkVersion: ^2.15
-
-package:
-  individually: true
+frameworkVersion: ^2.15.0
 
 plugins:
+  - serverless-pseudo-parameters
+  - serverless-iam-roles-per-function
   - serverless-offline
   - serverless-s3-local
 
@@ -16,6 +15,16 @@ provider:
     blockPublicAccess: true
     serverSideEncryption: AES256
   logRetentionInDays: 5
+  #tracing:
+  #  lambda: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - xray:PutTelemetryRecords
+        - xray:PutTraceSegments
+      Resource: '*'
+  #tags:
+  #  commit: '${env:COMMIT_ID}'
 
 custom:
   s3:
@@ -35,6 +44,8 @@ functions:
           bucket: 'document'
           event: s3:ObjectRemoved:*
           existing: true
+    iamRoleStatementsName: ${self:service.name}-${self:provider.stage}-document"
+    iamRoleStatementsInherit: true
 
 resources:
   Resources:

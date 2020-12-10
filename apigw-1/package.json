@@ -1,5 +1,5 @@
 {
-  "name": "apigw-2",
+  "name": "apigw-1",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,6 +11,8 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "serverless": "^2.15.0",
-    "serverless-offline": "^6.8.0"
+    "serverless-iam-roles-per-function": "^3.0.1",
+    "serverless-offline": "^6.8.0",
+    "serverless-pseudo-parameters": "^2.5.0"
   }
 }

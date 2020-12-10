@@ -9,11 +9,13 @@
   "keywords": [],
   "author": "James Kyburz <james.kyburz@gmail.com>",
   "license": "Apache-2.0",
-  "devDependencies": {
-    "serverless": "^2.15.0",
-    "serverless-offline": "^6.8.0"
-  },
   "dependencies": {
+    "serverless": "^2.15.0",
     "serverless-s3-local": "^0.6.7"
+  },
+  "devDependencies": {
+    "serverless-iam-roles-per-function": "^3.0.1",
+    "serverless-offline": "^6.8.0",
+    "serverless-pseudo-parameters": "^2.5.0"
   }
 }

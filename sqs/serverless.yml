@@ -1,6 +1,6 @@
 service: sqs-stack
 
-frameworkVersion: ^2.15
+frameworkVersion: ^2.15.0
 
 package:
   individually: true
@@ -18,6 +18,16 @@ provider:
     blockPublicAccess: true
     serverSideEncryption: AES256
   logRetentionInDays: 5
+  #tracing:
+  #  lambda: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - xray:PutTelemetryRecords
+        - xray:PutTraceSegments
+      Resource: '*'
+  #tags:
+  #  commit: '${env:COMMIT_ID}'
 
 custom:
   serverless-offline-sqs:
@@ -44,6 +54,8 @@ functions:
       ##    arn: "arn:#{AWS::Partition}:sqs:#{AWS::Region}:#{AWS::AccountId}:q"
       ##    enabled: true
       ##    batchSize: 1
+    iamRoleStatementsName: ${self:service.name}-${self:provider.stage}-sqs
+    iamRoleStatementsInherit: true
 
 resources:
   Resources:

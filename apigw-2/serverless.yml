@@ -1,6 +1,13 @@
 service: apigw-2
 
+frameworkVersion: ^2.15.0
+
+package:
+  individually: true
+
 plugins:
+  - serverless-pseudo-parameters
+  - serverless-iam-roles-per-function
   - serverless-offline
 
 provider:
@@ -12,6 +19,16 @@ provider:
     blockPublicAccess: true
     serverSideEncryption: AES256
   logRetentionInDays: 5
+  #tracing:
+  #  lambda: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - xray:PutTelemetryRecords
+        - xray:PutTraceSegments
+      Resource: '*'
+  #tags:
+  #  commit: '${env:COMMIT_ID}'
 
 functions:
   hello:
@@ -20,3 +37,5 @@ functions:
     handler: handler.catchAll
     events:
       - httpApi: '*'
+    iamRoleStatementsName: ${self:service.name}-${self:provider.stage}-hello
+    iamRoleStatementsInherit: true
