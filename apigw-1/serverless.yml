@@ -11,8 +11,8 @@ plugins:
 provider:
   name: aws
   runtime: nodejs12.x
-  httpApi:
-    payload: '1.0'
+  apiGateway:
+    shouldStartNameWithService: true
   deploymentBucket:
     blockPublicAccess: true
     serverSideEncryption: AES256
@@ -34,6 +34,11 @@ functions:
     memorySize: 128
     handler: handler.catchAll
     events:
-      - httpApi: '*'
+      - http:
+          path: /{proxy+}
+          method: any
+      - http:
+          path: ''
+          method: any
     iamRoleStatementsName: ${self:service.name}-${self:provider.stage}-hello
     iamRoleStatementsInherit: true
