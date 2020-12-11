@@ -50,10 +50,8 @@ functions:
              Fn::GetAtt:
                - Q
                - Arn
-      ##- sqs:
-      ##    arn: "arn:#{AWS::Partition}:sqs:#{AWS::Region}:#{AWS::AccountId}:q"
-      ##    enabled: true
-      ##    batchSize: 1
+           enabled: true
+           batchSize: 10
     iamRoleStatementsName: ${self:service.name}-${self:provider.stage}-sqs
     iamRoleStatementsInherit: true
     iamRoleStatements:

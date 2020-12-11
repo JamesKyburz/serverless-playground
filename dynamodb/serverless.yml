@@ -38,6 +38,9 @@ functions:
           type: dynamodb
           arn:
             Fn::GetAtt: [dynamodb, StreamArn]
+          batchSize: 1
+          batchWindow: 1
+          bisectBatchOnFunctionError: true
 
 resources:
   Resources:
