@@ -53,7 +53,7 @@ functions:
           batchSize: 1
           batchWindow: 1
           bisectBatchOnFunctionError: true
-          startingPosition: TRIM_HORIZON
+          startingPosition: LATEST
 
 resources:
   Resources:
