@@ -8,6 +8,8 @@ package:
 plugins:
   - serverless-iam-roles-per-function
   - serverless-offline
+  - serverless-offline-dynamodb-streams
+
 provider:
   name: aws
   runtime: nodejs12.x
@@ -26,6 +28,16 @@ provider:
   #tags:
   #  commit: '${env:COMMIT_ID}'
 
+custom:
+  serverless-offline-dynamodb-streams:
+    apiVersion: '2013-12-02'
+    endpoint: http://0.0.0.0:8000
+    region: us-east-1
+    accessKeyId: x
+    secretAccessKey: x
+    skipCacheInvalidation: false
+    readInterval: 500
+
 functions:
   trigger:
     timeout: 6
@@ -41,6 +53,7 @@ functions:
           batchSize: 1
           batchWindow: 1
           bisectBatchOnFunctionError: true
+          startingPosition: TRIM_HORIZON
 
 resources:
   Resources:
