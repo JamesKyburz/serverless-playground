@@ -1,0 +1,43 @@
+service: docker-hello
+
+frameworkVersion: ^2.15.0
+
+package:
+  individually: true
+
+plugins:
+  - serverless-iam-roles-per-function
+  - serverless-offline
+provider:
+  name: aws
+  ecr:
+    images:
+      appimage:
+        path: ./
+  httpApi:
+    payload: '2.0'
+  deploymentBucket:
+    blockPublicAccess: true
+    serverSideEncryption: AES256
+  logRetentionInDays: 5
+  #tracing:
+  #  lambda: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - xray:PutTelemetryRecords
+        - xray:PutTraceSegments
+      Resource: '*'
+  #tags:
+  #  commit: '${env:COMMIT_ID}'
+
+functions:
+  hello:
+    timeout: 6
+    memorySize: 128
+    image:
+      name: appimage
+    events:
+      - httpApi: '*'
+    iamRoleStatementsName: ${self:service.name}-${self:provider.stage}-hello
+    iamRoleStatementsInherit: true
